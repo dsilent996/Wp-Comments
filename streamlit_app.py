@@ -48,6 +48,11 @@ if st.button("🚀 Kirim Komentar"):
                 st.error(f"❌ Form komentar tidak ditemukan di {article_url}")
                 continue
 
+            if not article_url.startswith("http://") and not article_url.startswith("https://"):
+                st.error(f"Invalid URL: {article_url}")
+                continue
+
+
             # Ambil hidden input
             hidden_inputs = comment_form.find_all("input", {"type": "hidden"})
             hidden_data = {inp["name"]: inp["value"] for inp in hidden_inputs if "name" in inp.attrs and "value" in inp.attrs}
